@@ -217,3 +217,24 @@ summary(mod.en.met)
 
 #plot
 plot(mod.en.met)
+
+states.en.met.pop.wst <- subset(states, select = c("energy", "metro", "pop", "waste"))
+summary(states.en.met.pop.wst)
+plot(states.en.met.pop.wst)
+cor(states.en.met.pop.wst, use = "pairwise")
+mod.en.met.pop.waste <- lm(energy ~ metro + pop + waste, data = states)
+summary(mod.en.met.pop.waste)
+anova(mod.en.met, mod.en.met.pop.waste)
+
+#Exercise 1
+#additional variables
+mod.en.metro.by.waste <- lm(energy ~ metro * waste, data = states)
+
+#add additional regions
+mod.en.region <- lm(energy ~ metro * waste + region, data = states)
+anova(mod.en.region)
+
+
+
+
+
